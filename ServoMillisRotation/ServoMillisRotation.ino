@@ -2,6 +2,7 @@
 
 #define LED 12
 #define SERVO 7
+#define PIEZO 10
 
 unsigned long currentTime;
 unsigned long previousTime = 0;
@@ -14,6 +15,7 @@ void setup() {
   
   pinMode(LED, OUTPUT);
   servo.attach(SERVO);
+  pinMode(10,OUTPUT);
 
   servo.write(0); //Calibrando o Servo na posição 0 graus
 }
@@ -25,6 +27,7 @@ void loop() {
     previousTime = currentTime;
     Serial.print("Dispensando...   ");
     dispenser();
+    som();
     Serial.println("Feito!");
   }
 }
@@ -40,4 +43,11 @@ void dispenser() {
   digitalWrite(LED, LOW);
 }
 
-
+// ========= Som ===============
+void som() {
+  tone(10,262,150); //DO
+  delay(200);
+  tone(10,330,200); //MI
+  delay(150);
+  tone(10,349,200); //FA
+}
